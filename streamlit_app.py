@@ -15,8 +15,10 @@ from alpha_vantage.cryptocurrencies import CryptoCurrencies
 from alpha_vantage.foreignexchange import ForeignExchange
 
 
-quandl.ApiConfig.api_key = os.environ.get(YOUR_QUANDL_API_KEY)
-ts = TimeSeries(key=os.environ.get(YOUR_ALPHA_VANTAGE_API_KEY), output_format="pandas")
+quandl.ApiConfig.api_key = os.environ.get("YOUR_QUANDL_API_KEY")
+ts = TimeSeries(
+    key=os.environ.get("YOUR_ALPHA_VANTAGE_API_KEY"), output_format="pandas"
+)
 
 st.markdown(
     f"Demo app showing **Closing price** and daily **APR change** of a selected ticker from Alpha Vantage API"
