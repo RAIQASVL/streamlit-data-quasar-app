@@ -59,6 +59,9 @@ def apr_change(pandas_series_input):
 price_data["change"] = apr_change(price_data["4. close"])
 market_data["change"] = apr_change(market_data["4. close"])
 
+price_data["date"] = pd.to_datetime(price_data["date"])
+price_data.set_index("date", inplace=True)
+
 price_data_filtered = price_data[end_date:start_date]
 market_data_filtered = market_data[end_date:start_date]
 stock_market_correlation = price_data_filtered["change"].corr(
