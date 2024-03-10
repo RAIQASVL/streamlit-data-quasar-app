@@ -10,7 +10,7 @@ from pprint import pprint
 from datetime import datetime
 import quandl
 import pandas as pd
-import matplotlib.pyplot as plt
+
 from alpha_vantage.cryptocurrencies import CryptoCurrencies
 from alpha_vantage.foreignexchange import ForeignExchange
 
