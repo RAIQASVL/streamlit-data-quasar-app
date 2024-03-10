@@ -20,7 +20,10 @@ st.markdown(
 )
 
 ticker = st.sidebar.text_input("Ticker", "MSFT").upper()
-end_date = st.sidebar.date_input("End date", value=datetime.now()).strftime("%Y-%m-%d")
+end_date = st.sidebar.date_input("end date", value=datetime.now()).strftime("%Y-%m-%d")
+start_date = st.sidebar.date_input("start date", value=datetime(2015, 5, 31)).strftime(
+    "%Y-%m-%d"
+)
 
 
 @st.cache(suppress_st_warning=True, allow_output_mutation=True)
@@ -40,10 +43,6 @@ except:
     md_chart_1 = f"Invalid ticker **{ticker}** showing **MSFT** price"
     md_chart_2 = f"Invalid ticker **{ticker}** showing **MSFT** APR daily change"
 
-# Assuming you have defined start_date and alpha_vantage_api_key
-alpha_vantage_api_key = os.environ.get("YOUR_ALPHA_VANTAGE_API_KEY")
-start_date = "2024-03-10"
-
 
 def apr_change(pandas_series_input):
     return (
@@ -59,8 +58,6 @@ def apr_change(pandas_series_input):
 price_data["change"] = apr_change(price_data["4. close"])
 market_data["change"] = apr_change(market_data["4. close"])
 
-price_data["date"] = pd.to_datetime(price_data["date"])
-price_data.set_index("date", inplace=True)
 
 price_data_filtered = price_data[end_date:start_date]
 market_data_filtered = market_data[end_date:start_date]
