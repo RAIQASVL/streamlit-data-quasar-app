@@ -1,5 +1,4 @@
 import os
-
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -12,14 +11,13 @@ import pandas as pd
 
 quandl.ApiConfig.api_key = os.environ.get("QUANDL_API_KEY")
 ts = TimeSeries(key=os.environ.get("ALPHA_VANTAGE_API_KEY"), output_format="pandas")
-ts = TimeSeries(key=alpha_vantage_api_key, output_format="pandas")
-quandl.ApiConfig.api_key = quandl_api_key
 
 st.markdown(
-    f"Demo app showing **Closing price** and daily **APR change** of a selected ticker from alpha vantage API"
+    f"Demo app showing **Closing price** and daily **APR change** of a selected ticker from Alpha Vantage API"
 )
+
 ticker = st.sidebar.text_input("Ticker", "MSFT").upper()
-end_date = st.sidebar.date_input("end date", value=datetime.now()).strftime("%Y-%m-%d")
+end_date = st.sidebar.date_input("End date", value=datetime.now()).strftime("%Y-%m-%d")
 
 
 @st.cache(suppress_st_warning=True, allow_output_mutation=True)
@@ -37,7 +35,11 @@ except:
     price_data, price_meta_data = get_ticker_daily("MSFT")
     market_data, market_meta_data = get_ticker_daily("SPY")
     md_chart_1 = f"Invalid ticker **{ticker}** showing **MSFT** price"
-    md_chart_2 = f"Invalid ticker **{ticker}** showing **MSFT** APR daily change of"
+    md_chart_2 = f"Invalid ticker **{ticker}** showing **MSFT** APR daily change"
+
+# Assuming you have defined start_date and alpha_vantage_api_key
+start_date = "your_start_date"
+alpha_vantage_api_key = "your_alpha_vantage_api_key"
 
 
 def apr_change(pandas_series_input):
@@ -55,20 +57,20 @@ price_data["change"] = apr_change(price_data["4. close"])
 market_data["change"] = apr_change(market_data["4. close"])
 
 price_data_filtered = price_data[end_date:start_date]
-market_data_fitered = market_data[end_date:start_date]
+market_data_filtered = market_data[end_date:start_date]
 stock_market_correlation = price_data_filtered["change"].corr(
-    market_data_fitered["change"], method="pearson"
+    market_data_filtered["change"], method="pearson"
 )
 
-# estimate risk free return via 3 months treasury bonds
-treasury_yield = quandl.get("FRED/TB£MS", start_date=start_date, end_date=end_date)
-rfr = treasury_yield["Value"].mean()  # mean treasury yield over period
+# Estimate risk-free return via 3 months treasury bonds
+treasury_yield = quandl.get("FRED/TB3MS", start_date=start_date, end_date=end_date)
+rfr = treasury_yield["Value"].mean()  # mean treasury yield over the period
 
 stock_volatility = price_data_filtered["change"].std()
-market_volatilidy = market_data_fitered["change"].std()
+market_volatility = market_data_filtered["change"].std()
 stock_excess_return = price_data_filtered["change"].mean() - rfr
-market_excess_return = market_data_fitered["change"].mean() - rfr
-beta = stock_market_correlation * stock_volatility / market_volatilidy
+market_excess_return = market_data_filtered["change"].mean() - rfr
+beta = stock_market_correlation * stock_volatility / market_volatility
 alpha = stock_excess_return - beta * market_excess_return
 sharpe = stock_excess_return / stock_volatility
 metrics_df = pd.DataFrame(
