@@ -6,9 +6,14 @@ load_dotenv(dotenv_path)
 
 import streamlit as st
 from alpha_vantage.timeseries import TimeSeries
+from pprint import pprint
 from datetime import datetime
 import quandl
 import pandas as pd
+import matplotlib.pyplot as plt
+from alpha_vantage.cryptocurrencies import CryptoCurrencies
+from alpha_vantage.foreignexchange import ForeignExchange
+
 
 quandl.ApiConfig.api_key = os.environ.get("YOUR_QUANDL_API_KEY")
 ts = TimeSeries(
