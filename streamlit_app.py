@@ -1,3 +1,5 @@
+import os
+
 import subprocess
 
 subprocess.run(["pip", "install", "alpha_vantage"])
@@ -9,8 +11,8 @@ from datetime import datetime
 import quandl
 import pandas as pd
 
-quandl.ApiConfig.api_key = "f3ueibFkSNJ-Mt3jpMgq"
-ts = TimeSeries(key="N7TELZH3BBQS3S6J", output_format="pandas")
+quandl.ApiConfig.api_key = "YOUR_QUANDL_API_KEY"
+ts = TimeSeries(key="YOUR_ALPHA_VANTAGE_API_KEY", output_format="pandas")
 
 st.markdown(
     f"Demo app showing **Closing price** and daily **APR change** of a selected ticker from alpha vantage API"
