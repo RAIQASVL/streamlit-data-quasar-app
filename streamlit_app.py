@@ -26,7 +26,7 @@ start_date = st.sidebar.date_input("start date", value=datetime(2015, 5, 31)).st
 )
 
 
-@st.cache_data(suppress_st_warning=True, allow_output_mutation=True)
+@st.cache
 def get_ticker_daily(ticker_input):
     ticker_data, ticker_metadata = ts.get_daily(symbol=ticker_input, outputsize="full")
     return ticker_data, ticker_metadata
