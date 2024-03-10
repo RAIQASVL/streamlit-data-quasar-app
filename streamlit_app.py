@@ -1,9 +1,8 @@
 import os
 
-import subprocess
+from dotenv import load_dotenv
 
-subprocess.run(["pip", "install", "alpha_vantage"])
-
+load_dotenv()
 
 import streamlit as st
 from alpha_vantage.timeseries import TimeSeries
@@ -11,8 +10,10 @@ from datetime import datetime
 import quandl
 import pandas as pd
 
-quandl.ApiConfig.api_key = "YOUR_QUANDL_API_KEY"
-ts = TimeSeries(key="YOUR_ALPHA_VANTAGE_API_KEY", output_format="pandas")
+quandl.ApiConfig.api_key = os.environ.get("QUANDL_API_KEY")
+ts = TimeSeries(key=os.environ.get("ALPHA_VANTAGE_API_KEY"), output_format="pandas")
+ts = TimeSeries(key=alpha_vantage_api_key, output_format="pandas")
+quandl.ApiConfig.api_key = quandl_api_key
 
 st.markdown(
     f"Demo app showing **Closing price** and daily **APR change** of a selected ticker from alpha vantage API"
