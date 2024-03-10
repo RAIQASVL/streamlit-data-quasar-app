@@ -25,10 +25,10 @@ st.markdown(
 )
 
 ticker = st.sidebar.text_input("Ticker", "MSFT").upper()
-end_date = st.sidebar.date_input("end date", value=datetime.now()).strftime("%Y-%m-%d")
-start_date = st.sidebar.date_input("start date", value=datetime(2015, 5, 31)).strftime(
-    "%Y-%m-%d"
-)
+end_date = st.sidebar.date_input("end date", value=datetime.now()).strftime("%Y/%m/%d")
+start_date = st.sidebar.date_input(
+    "start date", value=datetime(2015 / 5 / 31)
+).strftime("%Y/%m/%d")
 
 
 @st.cache(suppress_st_warning=True, allow_output_mutation=True)

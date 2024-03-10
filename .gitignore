@@ -129,6 +129,10 @@ ENV/
 env.bak/
 venv.bak/
 
+# Ignore API keys file
+api_keys.env
+
+
 # Spyder project settings
 .spyderproject
 .spyproject
