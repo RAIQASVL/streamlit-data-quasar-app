@@ -2,3 +2,4 @@ alpha_vantage
 quandl
 streamlit
 pandas
+python-dotenv
