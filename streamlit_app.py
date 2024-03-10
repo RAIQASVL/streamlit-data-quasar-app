@@ -17,8 +17,7 @@ from alpha_vantage.foreignexchange import ForeignExchange
 
 quandl.ApiConfig.api_key = os.environ.get("YOUR_QUANDL_API_KEY")
 ts = TimeSeries(
-    ALPHAVANTAGE_API_KEY=os.environ.get("YOUR_ALPHA_VANTAGE_API_KEY"),
-    output_format="pandas",
+    key=os.environ.get("YOUR_ALPHA_VANTAGE_API_KEY"), output_format="pandas"
 )
 
 st.markdown(
