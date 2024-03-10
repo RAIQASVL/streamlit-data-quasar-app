@@ -64,7 +64,7 @@ price_data["change"] = apr_change(price_data["4. close"])
 market_data["change"] = apr_change(market_data["4. close"])
 
 
-price_data_filtered = price_data.loc[end_date:start_date]
+price_data_filtered = price_data[end_date:start_date]
 market_data_filtered = market_data[end_date:start_date]
 stock_market_correlation = price_data_filtered["change"].corr(
     market_data_filtered["change"], method="pearson"
