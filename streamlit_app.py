@@ -26,7 +26,7 @@ start_date = st.sidebar.date_input("start date", value=datetime(2015, 5, 31)).st
 )
 
 
-@st.cache
+@st.cache(suppress_st_warning=True, allow_output_mutation=True)
 def get_ticker_daily(ticker_input):
     ticker_data, ticker_metadata = ts.get_daily(symbol=ticker_input, outputsize="full")
     return ticker_data, ticker_metadata
@@ -59,7 +59,7 @@ price_data["change"] = apr_change(price_data["4. close"])
 market_data["change"] = apr_change(market_data["4. close"])
 
 
-price_data_filtered = price_data[end_date:start_date]
+price_data_filtered = price_data.loc[end_date:start_date]
 market_data_filtered = market_data[end_date:start_date]
 stock_market_correlation = price_data_filtered["change"].corr(
     market_data_filtered["change"], method="pearson"
