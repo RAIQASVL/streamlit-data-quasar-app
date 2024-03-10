@@ -1,3 +1,8 @@
+import subprocess
+
+subprocess.run(["pip", "install", "alpha_vantage"])
+
+
 import streamlit as st
 from alpha_vantage.timeseries import TimeSeries
 from datetime import datetime
