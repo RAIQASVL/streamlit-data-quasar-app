@@ -1,7 +1,8 @@
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
+dotenv_path = "api_keys.env"
+load_dotenv(dotenv_path)
 
 import streamlit as st
 from alpha_vantage.timeseries import TimeSeries
@@ -9,8 +10,10 @@ from datetime import datetime
 import quandl
 import pandas as pd
 
-quandl.ApiConfig.api_key = os.environ.get("QUANDL_API_KEY")
-ts = TimeSeries(key=os.environ.get("ALPHA_VANTAGE_API_KEY"), output_format="pandas")
+quandl.ApiConfig.api_key = os.environ.get("YOUR_QUANDL_API_KEY")
+ts = TimeSeries(
+    key=os.environ.get("YOUR_ALPHA_VANTAGE_API_KEY"), output_format="pandas"
+)
 
 st.markdown(
     f"Demo app showing **Closing price** and daily **APR change** of a selected ticker from Alpha Vantage API"
@@ -38,8 +41,8 @@ except:
     md_chart_2 = f"Invalid ticker **{ticker}** showing **MSFT** APR daily change"
 
 # Assuming you have defined start_date and alpha_vantage_api_key
-start_date = "your_start_date"
-alpha_vantage_api_key = "your_alpha_vantage_api_key"
+alpha_vantage_api_key = os.environ.get("YOUR_ALPHA_VANTAGE_API_KEY")
+start_date = "2024-03-10"
 
 
 def apr_change(pandas_series_input):
