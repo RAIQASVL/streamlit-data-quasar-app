@@ -28,9 +28,10 @@ end_date = st.sidebar.date_input("end date", value=datetime.now()).strftime("%Y/
 start_date = st.sidebar.date_input("start date", value=datetime(2015, 5, 31)).strftime(
     "%Y/%m/%d"
 )
+start_date = pd.to_datetime(start_date)  # Преобразуйте start_date в объект Timestamp
 
 
-@st.cache(suppress_st_warning=True, allow_output_mutation=True)
+@st.cache_data(suppress_st_warning=True, allow_output_mutation=True)
 def get_ticker_daily(ticker_input):
     ticker_data, ticker_metadata = ts.get_daily(symbol=ticker_input, outputsize="full")
     return ticker_data, ticker_metadata
@@ -61,6 +62,8 @@ def apr_change(pandas_series_input):
 
 price_data["change"] = apr_change(price_data["4. close"])
 market_data["change"] = apr_change(market_data["4. close"])
+
+market_data = market_data.sort_index()
 
 
 price_data.sort_index(inplace=True)
