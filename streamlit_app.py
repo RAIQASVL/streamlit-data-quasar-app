@@ -28,7 +28,7 @@ end_date = st.sidebar.date_input("end date", value=datetime.now()).strftime("%Y/
 start_date = st.sidebar.date_input("start date", value=datetime(2015, 5, 31)).strftime(
     "%Y/%m/%d"
 )
-start_date = pd.to_datetime(start_date)  # Преобразуйте start_date в объект Timestamp
+start_date = pd.to_datetime(start_date)  # Timestamp
 
 
 @st.cache_data
