@@ -6,7 +6,6 @@ load_dotenv(dotenv_path)
 
 import streamlit as st
 from alpha_vantage.timeseries import TimeSeries
-from pprint import pprint
 from datetime import datetime
 import quandl
 import pandas as pd
