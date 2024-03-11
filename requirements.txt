@@ -1,4 +1,6 @@
 streamlit
+timeseries
+time-series
 alpha_vantage
 Quandl
 pandas
