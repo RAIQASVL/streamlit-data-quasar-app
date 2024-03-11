@@ -3,6 +3,7 @@ alpha_vantage
 Quandl
 pandas
 python-dotenv
+pyarrow==14.0.2
 Cython
 requests
 setuptools
