@@ -17,7 +17,7 @@ quandl_key = os.environ.get("YOUR_QUANDL_API_KEY")
 print("Alpha Vantage API Key:", alpha_vantage_key)
 print("Quandl API Key:", quandl_key)
 
-ticker = "AAPL"  # or any default value
+ticker = "MSFT"  # or any default value
 start_date = "2022-01-01"  # or any default value
 end_date = "2022-12-31"  # or any default value
 
